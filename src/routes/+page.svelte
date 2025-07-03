@@ -3,6 +3,7 @@
   import '$lib/styles/agify.css';
   import { page } from '$app/stores';
   import { isValidName, sanitizeName } from '$lib/utils/regex.js';
+  import { onMount } from 'svelte';
 
   export let data;
 
@@ -11,10 +12,13 @@
   let loading = false;
   let debounceTimer;
 
+  onMount(() => {
+    history.replaceState(null, '', window.location.pathname);
+  });
+
   function onInput(event) {
     clearTimeout(debounceTimer);
 
-    // Sanitiza o input, removendo caracteres inválidos
     name = sanitizeName(event.target.value);
 
     if (!name.trim() || !isValidName(name)) {
@@ -31,9 +35,14 @@
   }
 </script>
 
+<svelte:head>
+  <title>Estimativa de Idade por Nome</title>
+  <link rel="icon" href="/voltera_energia_logo.png" />
+</svelte:head>
+
 <main>
-  <img src="/voltera_energia_logo.png" alt="Voltera Energia Logo" class="logo" />
-  <p class="subtitle">Estimativa da idade de qualquer nome!</p>
+  <img src="/voltera_energia_logotipo.png" alt="Voltera Energia Logo" class="logo" />
+  <p class="subtitle">Digite o primeiro nome para estimar sua idade!</p>
 
   <div class="search-box">
     <span class="icon">
