@@ -1,7 +1,7 @@
-export function debounce(fn, delay = 500) {
-  let timeout;
+export function debounce(callback, delay = 500) {
+  let timer;
   return (...args) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => fn(...args), delay);
+    clearTimeout(timer);
+    timer = setTimeout(() => callback(...args), delay);
   };
 }

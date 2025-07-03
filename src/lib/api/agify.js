@@ -1,5 +1,5 @@
 export async function fetchAge(name, fetchFn, useMock = false) {
-  if (!name || !name.trim()) return null;
+  if (!name?.trim()) return null;
 
   if (useMock) {
     return {
@@ -9,6 +9,6 @@ export async function fetchAge(name, fetchFn, useMock = false) {
     };
   }
 
-  const res = await fetchFn(`https://api.agify.io/?name=${encodeURIComponent(name)}`);
-  return await res.json();
+  const response = await fetchFn(`https://api.agify.io/?name=${encodeURIComponent(name)}`);
+  return await response.json();
 }
